@@ -2,7 +2,7 @@
 
 A Nook Built with React $ GraphQl
 
-## CORE
+### CORE
 
 ## FRONTEND
 
@@ -14,3 +14,7 @@ A Nook Built with React $ GraphQl
 > 2.  EXPRESS JS
 > 3.  GRAPHQL & APOLLO
 > 4.  MONGO DB
+
+## BACKEND LAYOUT
+
+app.js is my express app main file
