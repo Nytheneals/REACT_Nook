@@ -5,6 +5,13 @@ const graphql = require("graphql");
 // THEN PASS IN THE TYPE OF DATA YOU WANT
 const { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt } = graphql;
 
+// DUMMY DATA
+const books = [
+  { name: "Cougar", genre: "Romance", id: "1" },
+  { name: "Power", genre: "Violence", id: "2" },
+  { name: "Oiugi", genre: "Horror", id: "3" }
+];
+
 // DEFINING THE BOOK OBJECT TYPE
 const BookType = new GraphQLObjectType({
   name: "Book", // THIS IS THE NAME OF THE OBJECT OR ENTRY POINT
@@ -32,8 +39,14 @@ const RootQuery = new GraphQLObjectType({
       type: BookType,
       args: {
         type: GraphQLString,
-        resolve() {
+        resolve(parent, args) {
           //  code to get from db/ api
+          const id = args.id;
+          books.filter(function(book) {
+            if (book.id === "id") {
+              return true;
+            }
+          });
         }
       }
     },
@@ -43,6 +56,8 @@ const RootQuery = new GraphQLObjectType({
         type: GraphQLString,
         resolve() {
           //  code to get from db/ api
+          const id = args.id;
+          const book = books.filter(book => book.id === id);
         }
       }
     }
