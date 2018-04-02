@@ -3,7 +3,7 @@ const graphql = require("graphql");
 // TO CREATE AN OBJECT
 // PULL THE GraphQLObjectType METHOD FROM GRAPHQL
 // THEN PASS IN THE TYPE OF DATA YOU WANT
-const { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLID } = graphql;
 
 // DUMMY DATA
 const books = [
@@ -22,12 +22,7 @@ const authors = [
 const BookType = new GraphQLObjectType({
   name: "Book", // THIS IS THE NAME OF THE OBJECT OR ENTRY POINT
   fields: () => ({
-    id: {
-      type: GraphQLString,
-      resolve(book) {
-        return book.id;
-      }
-    },
+    id: { type: GraphQLID },
     name: { type: GraphQLString },
     genre: { type: GraphQLString }
   })
@@ -38,7 +33,7 @@ const AuthorType = new GraphQLObjectType({
   name: "Author", // THIS IS THE NAME OF THE OBJECT OR ENTRY POINT
   fields: () => ({
     name: { type: GraphQLString },
-    age: { type: GraphQLString }
+    age: { type: GraphQLID }
   })
 });
 
@@ -49,7 +44,7 @@ const RootQuery = new GraphQLObjectType({
     book: {
       type: BookType,
       args: {
-        id: { type: GraphQLString }
+        id: { type: GraphQLID }
       },
       resolve(parent, args) {
         //  code to get from db/ api
@@ -60,7 +55,7 @@ const RootQuery = new GraphQLObjectType({
     Author: {
       type: AuthorType,
       args: {
-        id: { type: GraphQLString }
+        id: { type: GraphQLID }
       },
       resolve(parent, args) {
         //  code to get from db/ api
