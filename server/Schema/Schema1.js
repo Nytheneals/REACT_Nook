@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const _ = require("lodash");
+
 // TO CREATE AN OBJECT
 // PULL THE GraphQLObjectType METHOD FROM GRAPHQL
 // THEN PASS IN THE TYPE OF DATA YOU WANT
@@ -22,7 +22,12 @@ const authors = [
 const BookType = new GraphQLObjectType({
   name: "Book", // THIS IS THE NAME OF THE OBJECT OR ENTRY POINT
   fields: () => ({
-    id: { type: GraphQLString },
+    id: {
+      type: GraphQLString,
+      resolve(book) {
+        return book.id;
+      }
+    },
     name: { type: GraphQLString },
     genre: { type: GraphQLString }
   })
@@ -48,7 +53,8 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         //  code to get from db/ api
-        return _.find(books, { id: args.id });
+        const id = args.id;
+        return books.filter(book => (book.id === "id" ? true : false));
       }
     },
     Author: {
@@ -58,7 +64,8 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         //  code to get from db/ api
-        return _.find(authors, { id: args.id });
+        const id = args.id;
+        return authors.filter(book => (author.id === "id" ? true : false));
       }
     }
   }

@@ -12,7 +12,13 @@ const app = express();
 // IT TAKES IN AN OBJECT WITH THE SCHEMA OF THE GRAPH OF OUR DATA.
 
 //********GRAPH QL SERVER********//
-app.use("/graphql", graphqlHTTP({}));
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true
+  })
+);
 // LISTENING TO OUR SERVER FOR ANY CHANGES OR REQUESTS
 app.listen(3000, () => {
   console.log("Now listening for request on port 3000");
